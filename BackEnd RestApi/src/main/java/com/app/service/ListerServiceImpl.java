@@ -60,7 +60,12 @@ public class ListerServiceImpl implements ListerService {
 	public ApiResponse updateLister(Long id, ListerUpdateDto updatedListerDto) {
 		Lister lister = listerRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Lister record found"));
-		lister = mapper.map(updatedListerDto, Lister.class);
+		lister.setFirstName(updatedListerDto.getFirstName());
+		lister.setLastName(updatedListerDto.getLastName());
+		lister.setEmail(updatedListerDto.getEmail());
+		lister.setPassword(updatedListerDto.getPassword());
+		lister.setContact(updatedListerDto.getContact());
+
 		listerRepo.save(lister);
 
 		return new ApiResponse("Lister details updated");

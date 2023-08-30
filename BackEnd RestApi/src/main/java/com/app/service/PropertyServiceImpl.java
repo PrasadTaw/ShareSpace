@@ -63,7 +63,8 @@ public class PropertyServiceImpl implements PropertyService {
 		AddressRequestDto address = propertyDto.getAddress();
 		PropertyFeaturesRequestDto propertyFeatures = propertyDto.getPropertyFeatures();
 		Property property = new Property(propertyDto.getPropertyName(), propertyDto.getPropertyArea(),
-				propertyDto.getRent(), lister, null, null);
+				propertyDto.getRent(), null, null, null);
+		property.setLister(lister);
 		property = mapper.map(propertyDto, Property.class);
 
 		propertyRepo.save(property);
@@ -75,7 +76,18 @@ public class PropertyServiceImpl implements PropertyService {
 	public ApiResponse updateProperty(Long id, PropertyUpdateDto updatedPropertyDto) {
 		Property property = propertyRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Property record found"));
-		property = mapper.map(updatedPropertyDto, Property.class);
+		property.setPropertyName(updatedPropertyDto.getPropertyName());
+		property.setPropertyArea(updatedPropertyDto.getPropertyArea());
+		property.setRent(updatedPropertyDto.getRent());
+		property.getAddress().setLine1(updatedPropertyDto.getAddress().getLine1());
+		property.getAddress().setCity(updatedPropertyDto.getAddress().getCity());
+		property.getAddress().setState(updatedPropertyDto.getAddress().getState());
+		property.getAddress().setPincode(updatedPropertyDto.getAddress().getPincode());
+		property.getPropertyFeatures().setAlcoholAllowed(updatedPropertyDto.getPropertyFeatures().isAlcoholAllowed());
+		property.getPropertyFeatures().setNonVegAllowed(updatedPropertyDto.getPropertyFeatures().isNonVegAllowed());
+		property.getPropertyFeatures().setAmenities(updatedPropertyDto.getPropertyFeatures().getAmenities());
+		property.getPropertyFeatures().setFurnishingStatus(updatedPropertyDto.getPropertyFeatures().getFurnishingStatus());
+		
 		propertyRepo.save(property);
 
 		return new ApiResponse("Property details updated");

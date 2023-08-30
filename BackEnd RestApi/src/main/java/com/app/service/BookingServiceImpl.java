@@ -83,7 +83,9 @@ public class BookingServiceImpl implements BookingService {
 	public ApiResponse updateBooking(Long id, BookingUpdateDto updatedBookingDto) {
 		Booking booking = bookingRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Booking record found"));
-		booking = mapper.map(updatedBookingDto, Booking.class);
+		booking.setBookingDate(updatedBookingDto.getBookingDate());
+		booking.setCheckInDate(updatedBookingDto.getCheckInDate());
+		booking.setCheckOutDate(updatedBookingDto.getCheckOutDate());
 		bookingRepo.save(booking);
 
 		return new ApiResponse("Booking details updated");

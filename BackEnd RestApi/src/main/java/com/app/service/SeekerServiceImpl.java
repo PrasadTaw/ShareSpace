@@ -59,7 +59,11 @@ public class SeekerServiceImpl implements SeekerService {
 	public ApiResponse updateSeeker(Long id, SeekerUpdateDto updatedSeekerDto) {
 		Seeker seeker = seekerRepo.findById(id)
 				.orElseThrow(()->new ResourceNotFoundException("No Seeker record found"));
-		seeker = mapper.map(updatedSeekerDto, Seeker.class);
+		seeker.setFirstName(updatedSeekerDto.getFirstName());
+		seeker.setLastName(updatedSeekerDto.getLastName());
+		seeker.setEmail(updatedSeekerDto.getEmail());
+		seeker.setPassword(updatedSeekerDto.getPassword());
+		seeker.setContact(updatedSeekerDto.getContact());
 		seekerRepo.save(seeker);
 		
 		return new ApiResponse("Seeker details updated");
