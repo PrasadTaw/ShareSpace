@@ -12,7 +12,6 @@ import com.app.custom_exception.ResourceNotFoundException;
 import com.app.dto.ApiResponse;
 import com.app.dto.ShortlistRequestDto;
 import com.app.dto.ShortlistResponseDto;
-import com.app.dto.ShortlistUpdateDto;
 import com.app.entities.Property;
 import com.app.entities.Seeker;
 import com.app.entities.Shortlist;
@@ -39,13 +38,19 @@ public class ShortlistServiceImpl implements ShortlistService {
 	@Override
 	public List<ShortlistResponseDto> getAllShortlists() {
 
-		List<ShortlistResponseDto> dto = new ArrayList<>();
+		List<ShortlistResponseDto> dtos = new ArrayList<>();
+		
+		
 		shortlistRepo.findAll().forEach((v) -> {
 			System.out.println(v);
-			dto.add(mapper.map(v, ShortlistResponseDto.class));
+			ShortlistResponseDto dto = new ShortlistResponseDto();
+			dto.setId(v.getId());
+			dto.setPropertyId(v.getProperty().getId());
+			dto.setSeekerId(v.getSeeker().getId());
+			dtos.add(dto);
 		});
 
-		return dto;
+		return dtos;
 
 	}
 
@@ -54,6 +59,8 @@ public class ShortlistServiceImpl implements ShortlistService {
 		Shortlist shortlist = shortlistRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Such shortlist found"));
 		ShortlistResponseDto dto = mapper.map(shortlist, ShortlistResponseDto.class);
+		dto.setSeekerId(shortlist.getSeeker().getId());
+		dto.setPropertyId(shortlist.getProperty().getId());
 		return dto;
 
 	}

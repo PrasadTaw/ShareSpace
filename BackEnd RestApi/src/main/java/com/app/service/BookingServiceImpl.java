@@ -47,7 +47,14 @@ public class BookingServiceImpl implements BookingService {
 		List<BookingResponseDto> dto = new ArrayList<>();
 		bookingRepo.findAll().forEach((v) -> {
 			System.out.println(v);
-			dto.add(mapper.map(v, BookingResponseDto.class));
+			BookingResponseDto brd = new BookingResponseDto();
+			brd = mapper.map(v, BookingResponseDto.class);
+			brd.setId(v.getId());
+			brd.setListerId(v.getLister().getId());
+			brd.setSeekerId(v.getSeeker().getId());
+			brd.setPropertyId(v.getProperty().getId());
+			
+			dto.add(brd);
 		});
 
 		return dto;
@@ -58,8 +65,11 @@ public class BookingServiceImpl implements BookingService {
 	public BookingResponseDto getBookingById(Long id) {
 		Booking booking = bookingRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Such booking found"));
-		BookingResponseDto dto = mapper.map(booking, BookingResponseDto.class);
-		return dto;
+		BookingResponseDto brd = mapper.map(booking, BookingResponseDto.class);
+		brd.setListerId(booking.getLister().getId());
+		brd.setSeekerId(booking.getSeeker().getId());
+		brd.setPropertyId(booking.getProperty().getId());
+		return brd;
 
 	}
 

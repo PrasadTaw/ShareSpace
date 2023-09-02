@@ -39,7 +39,11 @@ public class PropertyServiceImpl implements PropertyService {
 		List<PropertyResponseDto> dto = new ArrayList<>();
 		propertyRepo.findAll().forEach((v) -> {
 			System.out.println(v);
-			dto.add(mapper.map(v, PropertyResponseDto.class));
+			PropertyResponseDto prd = new PropertyResponseDto();
+			prd = mapper.map(v, PropertyResponseDto.class);
+			prd.setListerId(v.getLister().getId());
+			
+			dto.add(prd);
 		});
 
 		return dto;
@@ -50,8 +54,9 @@ public class PropertyServiceImpl implements PropertyService {
 	public PropertyResponseDto getPropertyById(Long id) {
 		Property property = propertyRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Such property found"));
-		PropertyResponseDto dto = mapper.map(property, PropertyResponseDto.class);
-		return dto;
+		PropertyResponseDto prd = mapper.map(property, PropertyResponseDto.class);
+		prd.setListerId(property.getLister().getId());
+		return prd;
 
 	}
 
@@ -64,8 +69,8 @@ public class PropertyServiceImpl implements PropertyService {
 		PropertyFeaturesRequestDto propertyFeatures = propertyDto.getPropertyFeatures();
 		Property property = new Property(propertyDto.getPropertyName(), propertyDto.getPropertyArea(),
 				propertyDto.getRent(), null, null, null);
-		property.setLister(lister);
 		property = mapper.map(propertyDto, Property.class);
+		property.setLister(lister);
 
 		propertyRepo.save(property);
 

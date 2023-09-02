@@ -47,7 +47,12 @@ public class MatchesServiceImpl implements MatchesService {
 		List<MatchesResponseDto> dto = new ArrayList<>();
 		matchesRepo.findAll().forEach((v) -> {
 			System.out.println(v);
-			dto.add(mapper.map(v, MatchesResponseDto.class));
+			MatchesResponseDto mrd = new MatchesResponseDto();
+			mrd.setId(v.getId());
+			mrd.setListerId(v.getLister().getId());
+			mrd.setSeekerId(v.getSeeker().getId());
+			mrd.setPropertyId(v.getProperty().getId());
+			dto.add(mrd);
 		});
 
 		return dto;
@@ -58,8 +63,11 @@ public class MatchesServiceImpl implements MatchesService {
 	public MatchesResponseDto getMatchesById(Long id) {
 		Matches matches = matchesRepo.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("No Such matches found"));
-		MatchesResponseDto dto = mapper.map(matches, MatchesResponseDto.class);
-		return dto;
+		MatchesResponseDto mrd = mapper.map(matches, MatchesResponseDto.class);
+		mrd.setListerId(matches.getLister().getId());
+		mrd.setSeekerId(matches.getSeeker().getId());
+		mrd.setPropertyId(matches.getProperty().getId());
+		return mrd;
 
 	}
 
