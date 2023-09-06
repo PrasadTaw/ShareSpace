@@ -1,7 +1,7 @@
 import axios from 'axios';
 const baseUrl="http://localhost:8080";
 
-class EmployerService{
+class ListerService{
     checkLogin(user){
         return axios.post(baseUrl+"/recruiter/login",user)
     }
@@ -31,4 +31,4 @@ class EmployerService{
     }
 }
 
-export default new EmployerService();
+export default new ListerService();

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import UserService from '../services/UserService';
 import HomePage from './HomePage';
-import '../EmployerCompenent/EHome.css';
+import '../ListerComponent/EHome.css';
 
 function JobList() {
     const [jarr, setJarr] = useState([]);

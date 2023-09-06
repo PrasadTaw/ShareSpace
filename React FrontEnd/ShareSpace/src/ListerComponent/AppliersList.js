@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
-import EmployerService from '../services/EmployerService';
+import EmployerService from '../services/ListerService';
 import EHomePage from './EHomePage';
 
 function AppliersList() {

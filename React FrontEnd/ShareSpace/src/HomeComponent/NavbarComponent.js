@@ -6,7 +6,7 @@ import { Routes, Route, Navigate, Link } from 'react-router-dom'
 import About from './About';
 import Login from './Login';
 import URegister from '../UserComponent/URegister';
-import ERegister from '../EmployerCompenent/ERegister';
+import ERegister from '../ListerComponent/ERegister';
 
 
 

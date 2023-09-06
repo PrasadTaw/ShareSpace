@@ -8,7 +8,7 @@ import NavbarComponent from './NavbarComponent'
 
 import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
 import { Nav, Navbar } from 'react-bootstrap';
-import EmployerService from '../services/EmployerService';
+import EmployerService from '../services/ListerService';
 
 
 export default function Login() {

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import UserService from '../services/UserService';
-import EmployerService from '../services/EmployerService';
+import EmployerService from '../services/ListerService';
 import EHomePage from './EHomePage';
-import '../EmployerCompenent/EHome.css'
+import './EHome.css'
 
 
 export default class Profile extends Component {

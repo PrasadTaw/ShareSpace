@@ -9,12 +9,12 @@ import URegister from './UserComponent/URegister';
 import HomePage from './UserComponent/HomePage';
 import Grid from './UserComponent/Grid';
 import JobList from './UserComponent/JobList';
-import EHomePage from './EmployerCompenent/EHomePage';
-import Profile from './EmployerCompenent/Profile';
-import ERegister from './EmployerCompenent/ERegister';
-import PostJob from './EmployerCompenent/PostJob'
-import EJobList from './EmployerCompenent/EJobList';
-import AppliersList from './EmployerCompenent/AppliersList';
+import EHomePage from './ListerComponent/EHomePage';
+import Profile from './ListerComponent/Profile';
+import ERegister from './ListerComponent/ERegister';
+import PostJob from './ListerComponent/PostJob'
+import EJobList from './ListerComponent/EJobList';
+import AppliersList from './ListerComponent/AppliersList';
 import AppliedJobs from './UserComponent/AppliedJobs';
 
 

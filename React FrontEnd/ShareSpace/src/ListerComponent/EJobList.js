@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import CustomModal from './CustomModal';
-import EmployerService from '../services/EmployerService';
+import EmployerService from '../services/ListerService';
 import AppliersList from './AppliersList';
 import { Link, useNavigate } from 'react-router-dom';
 import EHomePage from './EHomePage';
